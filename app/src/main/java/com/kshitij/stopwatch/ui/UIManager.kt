@@ -1,6 +1,5 @@
 package com.kshitij.stopwatch.ui
 
-import androidx.activity.result.contract.ActivityResultContracts.*
 import com.kshitij.stopwatch.R
 import com.kshitij.stopwatch.stopwatch.core.StopwatchData
 import com.kshitij.stopwatch.stopwatch.core.StopwatchState
@@ -79,7 +78,7 @@ class UIManager(
                     }
 
                     else -> {
-                        handleNonStartedState()
+                        handleNonStartedState(it)
                     }
                 }
             }
@@ -88,10 +87,16 @@ class UIManager(
     private fun handleStartedState() {
         onPlayPauseButtonClicked = stopWatchPauseCallback
         onIconChange(R.drawable.baseline_pause_24)
+        onStopCallback = stopWatchBackgroundCallbacks
     }
 
-    private fun handleNonStartedState() {
+    private fun handleNonStartedState(stopwatchState: StopwatchState) {
         onPlayPauseButtonClicked = stopWatchStartCallback
+        onStopCallback = if (stopwatchState == StopwatchState.RESET) {
+            {}
+        } else {
+            stopWatchBackgroundCallbacks
+        }
         onIconChange(R.drawable.baseline_play_arrow_24)
     }
 

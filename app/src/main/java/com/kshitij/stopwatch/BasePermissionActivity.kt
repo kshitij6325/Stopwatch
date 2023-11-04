@@ -9,16 +9,16 @@ import androidx.core.content.ContextCompat
 
 abstract class BasePermissionActivity : AppCompatActivity() {
 
-    abstract val onGranted: () -> Unit
-    abstract val onDenied: () -> Unit
-    open val onExplaination: () -> Unit = {}
+    abstract val onPermissionGranted: () -> Unit
+    abstract val onPermissionDenied: () -> Unit
+    abstract val onShowPermissionExplanation: () -> Unit
 
     private val requestPermissionLauncher: ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
-                onGranted()
+                onPermissionGranted()
             } else {
-                onDenied()
+                onPermissionDenied()
             }
         }
 
@@ -28,13 +28,13 @@ abstract class BasePermissionActivity : AppCompatActivity() {
                 this,
                 permission
             ) == PackageManager.PERMISSION_GRANTED -> {
-                onGranted()
+                onPermissionGranted()
             }
 
             ActivityCompat.shouldShowRequestPermissionRationale(
                 this, permission
             ) -> {
-                onExplaination()
+                onShowPermissionExplanation()
             }
 
             else -> {

@@ -30,14 +30,14 @@ class MainActivity : BasePermissionActivity(), Logger {
         }
     )
 
-    override val onGranted: () -> Unit = ::startStopwatch
+    override val onPermissionGranted: () -> Unit = ::startStopwatch
 
-    override val onDenied: () -> Unit = {
+    override val onPermissionDenied: () -> Unit = {
         toast("Grant notification permission. Stopwatch notification won't be shown on background")
         startStopwatch()
     }
 
-    override val onExplaination: () -> Unit = onDenied
+    override val onShowPermissionExplanation: () -> Unit = onPermissionDenied
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

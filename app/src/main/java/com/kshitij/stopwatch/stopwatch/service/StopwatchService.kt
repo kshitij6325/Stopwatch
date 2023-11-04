@@ -37,12 +37,11 @@ class StopwatchService : Service(), Logger {
 
     override fun onCreate() {
         super.onCreate()
-        stopwatchManager =
-            StopwatchManager.get(
-                this,
-                onForegroundState = ::dismissNotification,
-                onBackgroundSate = ::showForegroundNotification
-            )
+        stopwatchManager = StopwatchManager.get(
+            this,
+            onForegroundState = ::dismissNotification,
+            onBackgroundSate = ::showForegroundNotification
+        )
         time = stopwatchManager.time
         state = stopwatchManager.state
     }
