@@ -7,7 +7,7 @@ A simple stopwatch android app
 <img src = "https://github.com/kshitij6325/Stopwatch/assets/29084745/75635ae4-3ea2-47e5-ae60-e68742ced6b6" width="250" height="450"/>
 
 # Stopwatch app in background
-<img src = "https://github.com/kshitij6325/Stopwatch/assets/29084745/a2bec14e-838c-4113-823e-bf319c771708" width="250" height="450"/>
+<img src = "https://github.com/kshitij6325/Stopwatch/assets/29084745/afa141d5-5791-4882-bf4c-1232f34dca79" width="250" height="450"/>
 
 
 
