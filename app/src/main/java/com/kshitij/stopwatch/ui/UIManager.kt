@@ -3,6 +3,7 @@ package com.kshitij.stopwatch.ui
 import com.kshitij.stopwatch.R
 import com.kshitij.stopwatch.stopwatch.core.StopwatchData
 import com.kshitij.stopwatch.stopwatch.core.StopwatchState
+import com.kshitij.stopwatch.util.noOp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
@@ -93,7 +94,7 @@ class UIManager(
     private fun handleNonStartedState(stopwatchState: StopwatchState) {
         onPlayPauseButtonClicked = stopWatchStartCallback
         onStopCallback = if (stopwatchState == StopwatchState.RESET) {
-            {}
+            ::noOp
         } else {
             stopWatchBackgroundCallbacks
         }

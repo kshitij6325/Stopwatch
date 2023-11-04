@@ -46,4 +46,8 @@ fun Long.toStopwatchData(): StopwatchData {
     return StopwatchData(forHr, formin, forSec, ms)
 }
 
+fun noOp() {
+    /*NoOp*/
+}
+
 
