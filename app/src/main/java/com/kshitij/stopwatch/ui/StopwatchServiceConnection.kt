@@ -1,4 +1,4 @@
-package com.kshitij.stopwatch.stopwatch.service
+package com.kshitij.stopwatch.ui
 
 import android.content.ComponentName
 import android.content.ServiceConnection
@@ -7,6 +7,11 @@ import com.kshitij.stopwatch.stopwatch.service.StopwatchBinder
 import com.kshitij.stopwatch.stopwatch.service.StopwatchService
 import com.kshitij.stopwatch.util.Logger
 
+
+/**
+ * Class to communicate from [StopwatchService] and [MainActivity] once UI comes to foreground.
+ *
+ * **/
 class StopwatchServiceConnection(private val onConnectionEstablished: (StopwatchService?) -> Unit) :
     ServiceConnection, Logger {
 

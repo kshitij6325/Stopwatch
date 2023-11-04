@@ -15,6 +15,11 @@ import com.kshitij.stopwatch.util.Logger
 private const val CHANNEL_ID = "Stopwatch_notification_id"
 const val NOTIFICATION_ID = 998
 
+
+/**
+ * Impl class for [StopWatchNotificationHandler] using [NotificationManager].
+ *
+ * */
 class StopWatchNotificationHandlerImpl(
     private val context: Context,
     private val notificationManager: NotificationManager

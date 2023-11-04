@@ -7,7 +7,10 @@ import java.util.Timer
 
 import kotlin.concurrent.timerTask
 
-//TODO: Write unit test
+/**
+ * Implementation of [Stopwatch] using [Timer] class.
+ *
+ * */
 class StopwatchImpl : Stopwatch {
 
     override val time: Flow<StopwatchData> = MutableStateFlow(StopwatchData())

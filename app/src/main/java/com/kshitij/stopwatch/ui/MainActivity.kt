@@ -6,12 +6,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.kshitij.stopwatch.R
-import com.kshitij.stopwatch.stopwatch.core.StopwatchState
-import com.kshitij.stopwatch.stopwatch.service.StopwatchServiceConnection
 import com.kshitij.stopwatch.stopwatch.service.StopwatchService
 import com.kshitij.stopwatch.util.Logger
-import kotlinx.coroutines.launch
-import org.jetbrains.annotations.VisibleForTesting
 
 //TODO: Ask for notification permission
 //TODO: Fix notification bug

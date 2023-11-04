@@ -14,7 +14,12 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 /**
+ * Class to manage stopwatch and handle various actions related to stopwatch.
  *
+ * @param stopwatch: Instance of impl [Stopwatch].
+ * @param notificationHandler: Instance of impl [StopWatchNotificationHandler].
+ * @param onForegroundState: Callback invoked after [StopwatchAction.BACKGROUND].
+ * @param onBackgroundSate: Callback invoked after [StopwatchAction.FOREGROUND].
  *
  * **/
 class StopwatchManager(
@@ -26,9 +31,22 @@ class StopwatchManager(
 
     private var scope: CoroutineScope = CoroutineScope(SupervisorJob())
 
+    /**
+     * Observe this flow to get updated stopwatch time.
+     *
+     * **/
     val time = stopwatch.time
+
+    /**
+     * Observe this flow to get current stopwatch state.
+     *
+     * **/
     val state = stopwatch.state
 
+    /**
+     * Handles [StopwatchAction] passed from call site.
+     *
+     * **/
     fun onAction(action: StopwatchAction) {
         when (action) {
 
@@ -56,10 +74,18 @@ class StopwatchManager(
         }
     }
 
+    /**
+     * Update notification with [StopwatchData].
+     *
+     * **/
     fun updatedNotification(stopwatchData: StopwatchData): Notification {
         return notificationHandler.updateNotification(stopwatchData)
     }
 
+    /**
+     * Cleanup and reset stopwatch
+     *
+     * **/
     fun cleanup() {
         stopObservingTime()
         stopwatch.reset()
@@ -98,6 +124,11 @@ class StopwatchManager(
 
 }
 
+
+/**
+ * Enum class that denotes actions that can be taken from UI.
+ *
+ * */
 enum class StopwatchAction(private val tag: String) {
     FOREGROUND("action-foreground"),
     BACKGROUND("action-background"),
