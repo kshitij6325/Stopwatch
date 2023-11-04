@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1052267890874",
+    "project_id": "stopwatch-b03a4",
+    "storage_bucket": "stopwatch-b03a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052267890874:android:90f650d24c039116e0da83",
+        "android_client_info": {
+          "package_name": "com.kshitij.stopwatch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASyraq0f-01InFjnp5B6D5aPIKN3iwWmQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
