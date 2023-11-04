@@ -1,11 +1,11 @@
 package com.kshitij.stopwatch.ui
 
+import androidx.activity.result.contract.ActivityResultContracts.*
 import com.kshitij.stopwatch.R
 import com.kshitij.stopwatch.stopwatch.core.StopwatchData
 import com.kshitij.stopwatch.stopwatch.core.StopwatchState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -29,7 +29,7 @@ class UIManager(
     private val stopWatchForegroundCallback: () -> Unit,
     private val stopWatchBackgroundCallbacks: () -> Unit,
     private val onTimeChange: (String) -> Unit,
-    private val onIconChange: (Int) -> Unit
+    private val onIconChange: (Int) -> Unit,
 ) {
 
     /**
@@ -43,14 +43,14 @@ class UIManager(
      * Invoke this on UI to call when UI comes to foreground.
      *
      * */
-    var onStartCallback: () -> Unit = {}
+    var onStartCallback: () -> Unit = stopWatchForegroundCallback
         private set
 
     /**
      * Invoke this on UI to call when UI goes to background.
      *
      * */
-    var onStopCallback: () -> Unit = {}
+    var onStopCallback: () -> Unit = stopWatchBackgroundCallbacks
         private set
 
     /**
@@ -87,15 +87,11 @@ class UIManager(
 
     private fun handleStartedState() {
         onPlayPauseButtonClicked = stopWatchPauseCallback
-        onStartCallback = stopWatchForegroundCallback
-        onStopCallback = stopWatchBackgroundCallbacks
         onIconChange(R.drawable.baseline_pause_24)
     }
 
     private fun handleNonStartedState() {
         onPlayPauseButtonClicked = stopWatchStartCallback
-        onStartCallback = {}
-        onStopCallback = {}
         onIconChange(R.drawable.baseline_play_arrow_24)
     }
 

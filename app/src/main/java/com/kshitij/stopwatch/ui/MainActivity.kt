@@ -1,24 +1,25 @@
 package com.kshitij.stopwatch.ui
 
+import android.Manifest
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.kshitij.stopwatch.BasePermissionActivity
 import com.kshitij.stopwatch.R
 import com.kshitij.stopwatch.stopwatch.service.StopwatchService
 import com.kshitij.stopwatch.util.Logger
+import com.kshitij.stopwatch.util.toast
 
-//TODO: Ask for notification permission
 //TODO: Fix notification bug
-class MainActivity : AppCompatActivity(), Logger {
+class MainActivity : BasePermissionActivity(), Logger {
 
     override val tag: String
         get() = "MainActivity"
 
     private val uiManager = UIManager(lifecycleScope,
         stopWatchPauseCallback = ::pauseStopwatch,
-        stopWatchStartCallback = ::startStopwatch,
+        stopWatchStartCallback = ::startStopwatchWithPermission,
         stopWatchForegroundCallback = ::moveToForeground,
         stopWatchBackgroundCallbacks = ::moveToBackground,
         onTimeChange = {
@@ -29,10 +30,14 @@ class MainActivity : AppCompatActivity(), Logger {
         }
     )
 
-    private val connection = StopwatchServiceConnection {
-        uiManager.stopwatchTimeFlow = it?.time
-        uiManager.stopwatchStateFlow = it?.state
+    override val onGranted: () -> Unit = ::startStopwatch
+
+    override val onDenied: () -> Unit = {
+        toast("Grant notification permission. Stopwatch notification won't be shown on background")
+        startStopwatch()
     }
+
+    override val onExplaination: () -> Unit = onDenied
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +60,15 @@ class MainActivity : AppCompatActivity(), Logger {
     override fun onStop() {
         super.onStop()
         uiManager.onStopCallback()
+    }
+
+    private val connection = StopwatchServiceConnection {
+        uiManager.stopwatchTimeFlow = it?.time
+        uiManager.stopwatchStateFlow = it?.state
+    }
+
+    private fun startStopwatchWithPermission() {
+        askForPermission(Manifest.permission.POST_NOTIFICATIONS)
     }
 
     private fun startStopwatch() {

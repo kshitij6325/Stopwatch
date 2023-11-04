@@ -13,6 +13,7 @@ import com.kshitij.stopwatch.stopwatch.core.StopwatchState
 import com.kshitij.stopwatch.stopwatch.notification.NOTIFICATION_ID
 import com.kshitij.stopwatch.util.Logger
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 /**
  * Service in which stopwatch runs. Other components will observe the [time] from this service and
@@ -47,7 +48,7 @@ class StopwatchService : Service(), Logger {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-         intent?.action?.let { stopwatchManager.onAction(StopwatchAction.fromString(it)) }
+        intent?.action?.let { stopwatchManager.onAction(StopwatchAction.fromString(it)) }
         return super.onStartCommand(intent, flags, startId)
     }
 
@@ -67,7 +68,7 @@ class StopwatchService : Service(), Logger {
     private fun showForegroundNotification() {
         startForeground(
             NOTIFICATION_ID,
-            stopwatchManager.updatedNotification(StopwatchData(0, 0, 0, 0))
+            stopwatchManager.updatedNotification((time as StateFlow<StopwatchData>).value)
         )
     }
 
