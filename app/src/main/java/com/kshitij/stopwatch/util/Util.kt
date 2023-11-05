@@ -1,20 +1,10 @@
 package com.kshitij.stopwatch.util
 
-import android.Manifest
-import android.app.Activity
 import android.content.Context
-import android.content.pm.PackageManager
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.kshitij.stopwatch.BuildConfig
 import com.kshitij.stopwatch.stopwatch.core.StopwatchData
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 interface Logger {
 

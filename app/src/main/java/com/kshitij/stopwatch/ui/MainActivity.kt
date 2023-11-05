@@ -11,7 +11,6 @@ import com.kshitij.stopwatch.stopwatch.service.StopwatchService
 import com.kshitij.stopwatch.util.Logger
 import com.kshitij.stopwatch.util.toast
 
-//TODO: Fix notification bug
 class MainActivity : BasePermissionActivity(), Logger {
 
     override val tag: String
