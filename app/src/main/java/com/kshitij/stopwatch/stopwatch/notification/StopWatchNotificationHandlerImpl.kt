@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import com.kshitij.stopwatch.R
 import com.kshitij.stopwatch.ui.MainActivity
 import com.kshitij.stopwatch.stopwatch.core.StopwatchData
 import com.kshitij.stopwatch.util.Logger
@@ -46,7 +47,7 @@ class StopWatchNotificationHandlerImpl(
             PendingIntent.getActivity(context, 0, clickIntent, PendingIntent.FLAG_IMMUTABLE)
 
         return NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(androidx.core.R.drawable.notification_action_background)
+            .setSmallIcon(R.drawable.baseline_timer_24)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setOngoing(true)
             .setContentIntent(pendingIntent)
